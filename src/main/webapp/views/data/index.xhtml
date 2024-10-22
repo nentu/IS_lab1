@@ -12,30 +12,14 @@
     <h:outputLabel value="User: #{userBean.nick}"/>
     <p:commandButton value="logout" action="#{userBean.logout}"/>
 
-    <h:form id="includeForm">
-        <h:outputLabel value="${menuBean.contentName}"/>
-        <p:commandButton value="Book creatures" action="#{menuBean.setContentName('bookCreature')}"
-                         update="@form"
-        />
-        <p:commandButton value="Coordinates" action="#{menuBean.setContentName('coordinate')}"
-                         update="@form"
-        />
-        <p:commandButton value="Magic cities" action="#{menuBean.setContentName('magicCity')}"
-                         update="@form"
-        />
-        <p:commandButton value="Rings" action="#{menuBean.setContentName('ring')}"
-                         update="@form"
-        />
+    <ui:include src="tables/bookCreature/table.xhtml"/>
+    <ui:include src="tables/coordinate/table.xhtml"/>
+    <ui:include src="tables/magicCity/table.xhtml"/>
+    <ui:include src="tables/ring/table.xhtml"/>
 
-    </h:form>
+    <c:if test="#{userBean.admin}">
 
-    <ui:include id="content" src="${menuBean.getContentName()}"/>
-    <h:form id="contentForm">
-    </h:form>
-    <!--    <ui:include src="tables/bookCreature/table.xhtml"/>-->
-    <!--    <ui:include src="tables/coord   inate/table.xhtml"/>-->
-    <!--    <ui:include src="tables/magicCity/table.xhtml"/>-->
-    <!--    <ui:include src="tables/ring/table.xhtml"/>-->
-
+        <ui:include src="tables/authRequests.xhtml"/>
+    </c:if>
 </h:body>
 </html>

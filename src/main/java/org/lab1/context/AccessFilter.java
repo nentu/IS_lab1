@@ -24,8 +24,7 @@ public class AccessFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         UserBean userBean = (UserBean) httpRequest.getSession().getAttribute("userBean");
-        if (false &&(userBean == null || userBean.getId() == -1)) {
-//            httpResponse.sendRedirect("/views/login.xhtml");
+        if (userBean == null || userBean.getId() == -1) {
             return;
         }
 

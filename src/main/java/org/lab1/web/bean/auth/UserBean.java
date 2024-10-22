@@ -37,8 +37,7 @@ public class UserBean {
             boolean cor = probUser.getPassword().equals(User.PAPER + password + probUser.getSalt());
             if (!cor)
                 errorMsg = "Invalid password";
-
-            if (probUser.isRequest())
+            else if (probUser.isRequest())
                 errorMsg = "Wait. Your request is still in processed";
         }
 

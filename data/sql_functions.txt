@@ -1,0 +1,103 @@
+CREATE OR REPLACE FUNCTION delete_book_creatures_by_ring_id(p_ring_id INTEGER)
+RETURNS VOID AS $$
+BEGIN
+    DELETE FROM book_creatures
+    WHERE ring_id = p_ring_id;
+END;
+$$
+ LANGUAGE plpgsql;
+ 
+ 
+CREATE OR REPLACE FUNCTION get_youngest_book_creature()
+RETURNS TABLE(
+	id integer,
+	age bigint,
+	attack_level double precision,
+	creation_date timestamp,
+	creature_type varchar(255),
+	name varchar(255),
+	coordinates_id bigint,
+	creature_location_id bigint,
+	user_id bigint,
+	ring_id bigint
+) AS $$
+BEGIN
+	 RETURN QUERY SELECT * 
+	 FROM book_creatures as bc 
+	 WHERE bc.age = (
+		SELECT MIN(bc_inner.age) 
+			FROM book_creatures as bc_inner
+			) 
+	 LIMIT 1;
+END;
+$$
+ LANGUAGE plpgsql;
+ 
+ 
+CREATE OR REPLACE FUNCTION get_stronger(min_attacl_lvl double precision)
+RETURNS TABLE(
+	id integer,
+	age bigint,
+	attack_level double precision,
+	creation_date timestamp,
+	creature_type varchar(255),
+	name varchar(255),
+	coordinates_id bigint,
+	creature_location_id bigint,
+	user_id bigint,
+	ring_id bigint
+) AS $$
+BEGIN
+	 RETURN QUERY SELECT * 
+	 FROM book_creatures as bc 
+	 WHERE bc.attack_level > min_attacl_lvl;
+END;
+$$
+ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION move_hobbits_to_morder()
+RETURNS VOID AS $$
+BEGIN
+    UPDATE book_creatures as bc
+		SET creature_location_id = (
+			SELECT mc.id 
+			FROM magic_cities AS mc 
+			WHERE mc.name = 'Mordor' 
+			LIMIT 1
+		)
+		WHERE bc.creature_type = 'HOBBIT';
+	
+END;
+$$
+ LANGUAGE plpgsql;
+ 
+
+
+CREATE OR REPLACE FUNCTION swap_rings(creature1_id integer, creature2_id integer)
+RETURNS VOID AS $$
+DECLARE
+	temp_ring_1 bigint;
+BEGIN
+	SELECT bc.ring_id INTO temp_ring_1
+	FROM book_creatures AS bc 
+	WHERE bc.id = creature1_id
+	LIMIT 1;
+	
+    UPDATE book_creatures as bc
+		SET ring_id = (
+			SELECT bc.ring_id 
+			FROM book_creatures AS bc 
+			WHERE bc.id = creature2_id
+			LIMIT 1
+		)
+		WHERE bc.id = creature1_id;
+	
+	UPDATE book_creatures as bc
+		SET ring_id = temp_ring_1
+		WHERE bc.id = creature2_id;
+	
+END;
+$$
+ LANGUAGE plpgsql;
+ 
