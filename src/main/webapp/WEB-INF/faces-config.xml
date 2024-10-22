@@ -81,5 +81,15 @@
         </navigation-case>
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{menuBean.goUsers}</from-action>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/views/data/pages/authRequests.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>
 

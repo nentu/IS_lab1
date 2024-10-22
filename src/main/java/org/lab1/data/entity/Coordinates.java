@@ -27,4 +27,9 @@ public class Coordinates implements Identable, Ownerable {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User owner; // Cannot be null
+
+    @Override
+    public String toString(){
+        return "(" + x + ", " + y + ")";
+    }
 }

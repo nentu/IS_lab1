@@ -18,20 +18,27 @@ public class MenuBean {
 
     String contentName = "coordinate";
 
-    public String goCoordinates(){
+    public String goCoordinates() {
         return "coordinate";
     }
 
-    public String goRings(){
+    public String goRings() {
         return "ring";
     }
-    public String goCity(){
+
+    public String goCity() {
         return "magicCity";
     }
-    public String goExtra(){
+
+    public String goUsers() {
+        return "users";
+    }
+
+    public String goExtra() {
         return "extra";
     }
-    public String goBookCreature(){
+
+    public String goBookCreature() {
         return "bookCreature";
     }
 

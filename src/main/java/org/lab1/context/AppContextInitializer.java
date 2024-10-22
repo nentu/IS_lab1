@@ -44,6 +44,7 @@ public class AppContextInitializer implements ServletContextListener {
             admin.setNick("nentu");
             admin.setAdmin(true);
             admin.setRequest(false);
+
             CRUD.add(admin);
 
             User user = new User();
@@ -154,6 +155,7 @@ public class AppContextInitializer implements ServletContextListener {
             UserBean checkUser = new UserBean();
             checkUser.setLogin("nentu");
             checkUser.setPassword("nentu");
+//            checkUser.setRequest(false);
             System.out.println(checkUser.validateUser());
         }
 

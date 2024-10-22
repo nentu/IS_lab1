@@ -33,10 +33,10 @@
 
             <p:column
                     headerText="COORDINATESID"
-                    sortBy="#{bookCreature.coordinatesId}"
-                    filterBy="#{bookCreature.coordinatesId}"
+                    sortBy="#{bookCreature.coordinates}"
+                    filterBy="#{bookCreature.coordinates}"
                     filterMatchMode="contains">
-                <h:outputText value="#{bookCreature.coordinatesId}"/>
+                <h:outputText value="#{bookCreature.coordinates}"/>
             </p:column>
 
             <p:column
@@ -80,11 +80,11 @@
             </p:column>
 
             <p:column
-                    headerText="RINGID"
-                    sortBy="#{bookCreature.ringId}"
-                    filterBy="#{bookCreature.ringId}"
+                    headerText="RING"
+                    sortBy="#{bookCreature.ring.name}"
+                    filterBy="#{bookCreature.ring.name}"
                     filterMatchMode="contains">
-                <h:outputText value="#{bookCreature.ringId}"/>
+                <h:outputText value="#{bookCreature.ring.name}"/>
             </p:column>
 
             <c:if test="${needEdit}">

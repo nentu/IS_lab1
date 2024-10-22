@@ -8,8 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @ManagedBean(name = "userBean")
 @SessionScoped
@@ -57,12 +55,12 @@ public class UserBean {
 
     public User toEntity() {
         User user = new User();
-        user.setId(id);
         user.setLogin(login);
         user.setPassword(password);
         user.setNick(nick);
         user.setAdmin(isAdmin);
         user.setSalt(salt);
+        user.setRequest(isRequest);
 
         return user;
     }
@@ -70,6 +68,19 @@ public class UserBean {
     public int logout() {
         id = -1L;
         return 1;
+    }
+
+    public boolean register() {
+        salt = User.generateString();
+        User newUser = toEntity();
+        try {
+            CRUD.add(newUser);
+            return true;
+        } catch (Exception e) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage(":registerForm:registerPanel", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login is already in used", null));
+            return false;
+        }
     }
 
 }
