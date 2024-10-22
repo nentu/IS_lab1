@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import java.awt.print.Book;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +89,7 @@ public class CRUD {
         return res;
     }
 
-    public static User getUserByLogin(String login){
+    public static User getUserByLogin(String login) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -111,11 +113,66 @@ public class CRUD {
         return res;
     }
 
+    private static void executeProcedure(String procedure) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<BookCreature> res = em.createNativeQuery("SELECT * FROM " + procedure + ";").getResultList();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+
+
+    private static List<BookCreature> executeFunction(String function) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<BookCreature> res = em.createNativeQuery("SELECT * FROM " + function + ";", "bookCreatureMapping").getResultList();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        return res;
+    }
+
+    public static List<BookCreature> getStronger(float minAttack) {
+        return executeFunction("get_stronger(" + minAttack + ")");
+    }
+
+    public static void deleteBookCreaturesByRingId(long id) {
+        executeProcedure("delete_book_creatures_by_ring_id(" + id + ")");
+    }
+
+    public static void moveHobbitsToMorder() {
+        executeProcedure("move_hobbits_to_morder()");
+    }
+
+    public static void swapRings(long id1, long id2) {
+        executeProcedure("swap_rings(" + id1 + ", " + id2 + ")");
+    }
+
+
+    public static BookCreature getYoungestBookCreature() {
+        List<BookCreature> resList = executeFunction(
+                "get_youngest_book_creature()"
+        );
+
+        BookCreature res = new BookCreature();
+        if (resList.isEmpty())
+            res.setId(-1);
+        else
+            res = resList.get(0);
+
+        return res;
+
+    }
+
+
     public static <T> List<BookCreature> findBookCreatureByClassId(Class<T> classname, long id) {
         return findAll(BookCreature.class).stream().filter(bookCreature -> {
             if (classname == Coordinates.class)
                 return bookCreature.getRing().getId() == id;
-            if (classname == Ring.class){
+            if (classname == Ring.class) {
                 long ringId = bookCreature.getRing().getId();
                 return ringId == id;
             }

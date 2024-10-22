@@ -9,18 +9,7 @@ $$
  
  
 CREATE OR REPLACE FUNCTION get_youngest_book_creature()
-RETURNS TABLE(
-	id integer,
-	age bigint,
-	attack_level double precision,
-	creation_date timestamp,
-	creature_type varchar(255),
-	name varchar(255),
-	coordinates_id bigint,
-	creature_location_id bigint,
-	user_id bigint,
-	ring_id bigint
-) AS $$
+RETURNS SETOF book_creatures AS $$
 BEGIN
 	 RETURN QUERY SELECT * 
 	 FROM book_creatures as bc 
@@ -35,18 +24,7 @@ $$
  
  
 CREATE OR REPLACE FUNCTION get_stronger(min_attacl_lvl double precision)
-RETURNS TABLE(
-	id integer,
-	age bigint,
-	attack_level double precision,
-	creation_date timestamp,
-	creature_type varchar(255),
-	name varchar(255),
-	coordinates_id bigint,
-	creature_location_id bigint,
-	user_id bigint,
-	ring_id bigint
-) AS $$
+RETURNS SETOF book_creatures AS $$
 BEGIN
 	 RETURN QUERY SELECT * 
 	 FROM book_creatures as bc 

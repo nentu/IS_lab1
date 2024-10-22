@@ -29,7 +29,8 @@ public class AppContextInitializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        if (false) {
+
+        if (true) {
 
             System.out.println(new BookCreatureBean().getFieldNames());
             System.out.println(new CoordinateBean().getFieldNames());
@@ -155,6 +156,7 @@ public class AppContextInitializer implements ServletContextListener {
             checkUser.setPassword("nentu");
             System.out.println(checkUser.validateUser());
         }
+
 
         ServletContextListener.super.contextInitialized(sce);
 

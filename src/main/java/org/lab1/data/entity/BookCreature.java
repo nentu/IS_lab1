@@ -11,6 +11,24 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "book_creatures")
 @Data
+@SqlResultSetMapping(
+        name = "bookCreatureMapping",
+        entities = @EntityResult(
+                entityClass = BookCreature.class,
+                fields = {
+                        @FieldResult(name = "id", column = "id"),
+                        @FieldResult(name = "name", column = "name"),
+                        @FieldResult(name = "coordinates", column = "coordinates_id"),
+                        @FieldResult(name = "creationDate", column = "creation_date"),
+                        @FieldResult(name = "age", column = "age"),
+                        @FieldResult(name = "creatureType", column = "creature_type"),
+                        @FieldResult(name = "creatureLocation", column = "creature_location_id"),
+                        @FieldResult(name = "attackLevel", column = "attack_level"),
+                        @FieldResult(name = "ring", column = "ring_id"),
+                        @FieldResult(name = "owner", column = "user_id")
+                }
+        )
+)
 public class BookCreature implements Identable, Ownerable{
 
     @Id
