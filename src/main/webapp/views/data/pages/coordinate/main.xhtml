@@ -8,55 +8,53 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head/>
 <h:body>
-    <ui:composition>
-        <h:form id="coordinateTableForm">
-            <p:poll interval="1" update="coordinateTableForm"/>
+    <ui:include src="../../head.xhtml"/>
+    <h:form id="coordinateTableForm">
+        <!--            <p:poll interval="1" update="@form"/>-->
 
-            <p:outputLabel value="Coordinates"/>
-            <p:outputLabel value="#{coordinatesBean.fieldNames}"/>
+        <p:outputLabel value="Coordinates"/>
 
-            <ui:include src="table.xhtml"/>
+        <ui:include src="table.xhtml"/>
 
             <p:commandButton
-                    value="Add"
-                    action="#{coordinatesBean.emptyInstance()}"
-                    update="coordinateCreatePanel:coordCreateComponentDialog"
-                    oncomplete="PF('coordCreateComponentDialog').show();">
-            </p:commandButton>
-        </h:form>
+                value="Add"
+                action="#{coordinatesBean.emptyInstance()}"
+                update="coordinateCreatePanel:coordCreateComponentDialog"
+                oncomplete="PF('coordCreateComponentDialog').show();">
+        </p:commandButton>
+    </h:form>
 
-        <h:form id="coordinateCreatePanel">
-            <p:dialog id="coordCreateComponentDialog" widgetVar="coordCreateComponentDialog" header="Create coordinate">
-                <ui:include src="panelInput.xhtml"/>
-                <p:commandButton value="Add" action="#{coordinatesBean.addItem()}"
-                                 update="coordinateTableForm :coordinateCreatePanel"
-                                 onerror="handleError(xhr, status, error)"
-                />
-            </p:dialog>
-            <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
-        </h:form>
+    <h:form id="coordinateCreatePanel">
+        <p:dialog id="coordCreateComponentDialog" widgetVar="coordCreateComponentDialog" header="Create coordinate">
+            <ui:include src="panelInput.xhtml"/>
+            <p:commandButton value="Add" action="#{coordinatesBean.addItem()}"
+                             update="coordinateTableForm coordinateCreatePanel"
+                             onerror="handleError(xhr, status, error)"
+            />
+        </p:dialog>
+        <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
+    </h:form>
 
-        <h:form id="coordinateEditPanel">
-            <p:dialog
-                    id="coordComponentDialog"
-                    widgetVar="coordComponentDialog"
-                    header="Edit coordinate"
-                    closable="false"
-            >
-                <ui:include src="panelInput.xhtml"/>
-                <p:commandButton value="Edit" action="#{coordinatesBean.editItem()}"
-                                 rendered="#{userBean.admin || userBean.id == coordinatesBean.itemsStack.peek().owner.id}"
-                                 update="coordinateTableForm"
-                                 onclick="PF('coordComponentDialog').hide();"/>
-                <p:commandButton value="Remove" action="#{coordinatesBean.removeItem()}"
-                                 rendered="#{userBean.admin || userBean.id == coordinatesBean.itemsStack.peek().owner.id}"
-                                 update="coordinateTableForm"
-                                 onclick="PF('coordComponentDialog').hide();"/>
-                <p:commandButton value="Close" action="#{coordinatesBean.freeStack()}"
-                                 update="bookCreatureTableForm"
-                                 onclick="PF('bookCreatureComponentDialog').hide();"/>
-            </p:dialog>
-        </h:form>
-    </ui:composition>
+    <h:form id="coordinateEditPanel">
+        <p:dialog
+                id="coordComponentDialog"
+                widgetVar="coordComponentDialog"
+                header="Edit coordinate"
+                closable="false"
+        >
+            <ui:include src="panelInput.xhtml"/>
+            <p:commandButton value="Edit" action="#{coordinatesBean.editItem()}"
+                             rendered="#{userBean.admin || userBean.id == coordinatesBean.itemsStack.peek().owner.id}"
+                             update="coordinateTableForm"
+                             onclick="PF('coordComponentDialog').hide();"/>
+            <p:commandButton value="Remove" action="#{coordinatesBean.removeItem()}"
+                             rendered="#{userBean.admin || userBean.id == coordinatesBean.itemsStack.peek().owner.id}"
+                             update="coordinateTableForm"
+                             onclick="PF('coordComponentDialog').hide();"/>
+            <p:commandButton value="Close" action="#{coordinatesBean.freeStack()}"
+                             update="coordinateTableForm"
+                             onclick="PF('coordComponentDialog').hide();"/>
+        </p:dialog>
+    </h:form>
 </h:body>
 </html>
