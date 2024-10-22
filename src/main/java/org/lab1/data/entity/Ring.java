@@ -21,7 +21,7 @@ public class Ring implements Identable, Ownerable {
     private String name; // Cannot be null, string cannot be empty
 
     @Column(nullable = false)
-    private long weight; // Must be greater than 0
+    private long weight = 1; // Must be greater than 0
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

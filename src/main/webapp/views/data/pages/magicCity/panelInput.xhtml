@@ -13,11 +13,11 @@
             <h:outputLabel value="Id:"/>
             <h:outputLabel value="#{magicCityBean.itemsStack.peek().id}"/>
             <h:outputLabel value="Name:"/>
-            <p:inputText value="#{magicCityBean.itemsStack.peek().name}"/>
+            <p:inputText value="#{magicCityBean.itemsStack.peek().name}" required="true"/>
             <h:outputLabel value="Area:"/>
-            <p:spinner value="#{magicCityBean.itemsStack.peek().area}"/>
+            <p:spinner value="#{magicCityBean.itemsStack.peek().area}" min="1"/>
             <h:outputLabel value="Population:"/>
-            <p:spinner value="#{magicCityBean.itemsStack.peek().population}"/>
+            <p:spinner value="#{magicCityBean.itemsStack.peek().population}" required="true" min="1"/>
             <h:outputLabel value="Establishment date:"/>
             <p:datePicker value="#{magicCityBean.itemsStack.peek().establishmentDate}" showTime="true">
                 <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" type="localDateTime"/>
@@ -33,7 +33,7 @@
                 <f:selectItem itemLabel="False" itemValue="#{false}"/>
             </p:selectOneRadio>
             <h:outputLabel value="Population density:"/>
-            <p:spinner value="#{magicCityBean.itemsStack.peek().populationDensity}" stepFactor="0.1"/>
+            <p:spinner value="#{magicCityBean.itemsStack.peek().populationDensity}" stepFactor="0.01" min="0.01"/>
 
         </h:panelGrid>
     </ui:composition>

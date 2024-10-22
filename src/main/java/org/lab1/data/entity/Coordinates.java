@@ -19,7 +19,7 @@ public class Coordinates implements Identable, Ownerable {
     private long id; // Primary key, auto-generated
 
     @Column(nullable = false)
-    private Long x; // Cannot be null
+    private Long x = 0L; // Cannot be null
 
     @Column()
     private float y;

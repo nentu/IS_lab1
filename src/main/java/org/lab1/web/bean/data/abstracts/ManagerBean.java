@@ -65,7 +65,7 @@ public abstract class ManagerBean<T extends Ownerable & Identable> {
 
     protected User getCurrentOwner(){
         Map<String, Object> session =  FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        return ((UserBean) session.get("userBean")).toEntity();
+        return CRUD.find(User.class, ((UserBean) session.get("userBean")).getId());
     }
 
 

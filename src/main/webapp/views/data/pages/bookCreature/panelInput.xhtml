@@ -14,33 +14,40 @@
             <h:outputLabel value="id:"/>
             <h:outputLabel value="#{bookCreatureBean.itemsStack.peek().id}"/>
             <h:outputLabel value="name:"/>
-            <p:inputText value="#{bookCreatureBean.itemsStack.peek().name}"/>
+            <p:inputText value="#{bookCreatureBean.itemsStack.peek().name}" required="true"
+                         validatorMessage="Name is required">
+                <f:validateLength minimum="1" maximum="50"/>
+            </p:inputText>
             <h:outputLabel value="coordinates:"/>
-            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().coordinatesId}">
+            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().coordinatesId}" required="true"
+                             validatorMessage="Coordinates are required">
                 <f:selectItems value="#{coordinatesBean.idList}" var="id" itemValue="#{id}" itemLabel="#{id}"/>
             </p:selectOneMenu>
             <h:outputLabel value="creationDate:"/>
-            <p:datePicker value="#{bookCreatureBean.itemsStack.peek().creationDate}" showTime="true">
+            <p:datePicker value="#{bookCreatureBean.itemsStack.peek().creationDate}" showTime="true" required="true"
+                          validatorMessage="Creation date is required">
                 <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" type="localDateTime"/>
             </p:datePicker>
             <h:outputLabel value="age:"/>
-            <p:spinner value="#{bookCreatureBean.itemsStack.peek().age}"/>
+            <p:spinner value="#{bookCreatureBean.itemsStack.peek().age}" min="1" max="1000" validatorMessage="Age must be between 1 and 1000"/>
             <h:outputLabel value="creatureType:"/>
-            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().creatureType}">
+            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().creatureType}" required="true" validatorMessage="Creature type is required">
                 <f:selectItems value="#{bookCreatureTypeBean.typeList}" var="type" itemValue="#{type}"
                                itemLabel="#{type}"/>
             </p:selectOneMenu>
             <h:outputLabel value="creatureLocation:"/>
-            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().creatureLocationId}">
+            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().creatureLocationId}" required="true" validatorMessage="Creature location is required">
                 <f:selectItems value="#{magicCityBean.idList}" var="id" itemValue="#{id}" itemLabel="#{id}"/>
             </p:selectOneMenu>
             <h:outputLabel value="attackLevel:"/>
-            <p:spinner value="#{bookCreatureBean.itemsStack.peek().attackLevel}"/>
+            <p:spinner value="#{bookCreatureBean.itemsStack.peek().attackLevel}" min="0.01" stepFactor="0.01"/>
             <h:outputLabel value="ring:"/>
             <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().ringId}">
                 <f:selectItems value="#{ringBean.idList}" var="id" itemValue="#{id}" itemLabel="#{id}"/>
             </p:selectOneMenu>
         </h:panelGrid>
+
+        <p:messages globalOnly="false" showDetail="true" showSummary="true" />
 
     </ui:composition>
 </h:body>

@@ -10,7 +10,7 @@
 <h:head/>
 <h:body>
     <ui:composition>
-        <h:outputLabel value="User: #{userBean.nick}"/>
+        <h:outputLabel value="User: #{userBean.user.nick}"/>
         <p:commandButton value="logout" action="#{userBean.logout}"/>
 
         <h:form id="includeForm">
@@ -27,7 +27,7 @@
             <p:commandButton value="Rings" action="#{menuBean.goRings}"
                              update="@form"
             />
-            <c:if test="#{userBean.admin}">
+            <c:if test="#{userBean.user.admin}">
                 <p:commandButton value="User" action="#{menuBean.goUsers}"
                                  update="@form"
                 />

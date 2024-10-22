@@ -26,10 +26,10 @@ public class MagicCity implements Identable, Ownerable {
     private String name; // Cannot be null, string cannot be empty
 
     @Column(nullable = false)
-    private int area; // Must be greater than 0
+    private int area = 1; // Must be greater than 0
 
     @Column(nullable = false)
-    private long population; // Must be greater than 0
+    private long population = 1; // Must be greater than 0
 
     // Can be null
     @Setter
@@ -46,7 +46,7 @@ public class MagicCity implements Identable, Ownerable {
     private boolean capital; // Indicates if it is a capital city
 
     @Column(name = "population_density")
-    private Float populationDensity; // Must be greater than 0
+    private Float populationDensity = 0.0001F; // Must be greater than 0
 
     @Setter
     @ManyToOne

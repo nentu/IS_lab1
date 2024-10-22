@@ -20,7 +20,9 @@ public class UserBean {
     private String nick;
     private boolean isAdmin = false;
     private boolean isRequest = true;
-    private String salt;
+//    private String salt;
+    private User user;
+
 
 
     public boolean validateUser() {
@@ -32,7 +34,7 @@ public class UserBean {
         if (probUser == null)
             errorMsg = "Invalid Login";
         else {
-            boolean cor = probUser.getPassword().equals(User.PAPER + password + probUser.getSalt());
+            boolean cor = probUser.getPassword().equals(User.hashString(password));
             if (!cor)
                 errorMsg = "Invalid password";
             else if (probUser.isRequest())
@@ -45,11 +47,10 @@ public class UserBean {
             return false;
         }
 
-
+        user = probUser;
         id = probUser.getId();
         isAdmin = probUser.isAdmin();
         nick = probUser.getNick();
-        salt = probUser.getSalt();
         return true;
     }
 
@@ -59,7 +60,6 @@ public class UserBean {
         user.setPassword(password);
         user.setNick(nick);
         user.setAdmin(isAdmin);
-        user.setSalt(salt);
         user.setRequest(isRequest);
 
         return user;
@@ -71,14 +71,13 @@ public class UserBean {
     }
 
     public boolean register() {
-        salt = User.generateString();
         User newUser = toEntity();
         try {
             CRUD.add(newUser);
             return true;
         } catch (Exception e) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
-            facesContext.addMessage(":registerForm:registerPanel", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login is already in used", null));
+            facesContext.addMessage(":registerForm:registerPanel", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Bad credential. Empty or in used", null));
             return false;
         }
     }

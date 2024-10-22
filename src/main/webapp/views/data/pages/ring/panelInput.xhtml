@@ -13,9 +13,9 @@
             <h:outputLabel value="Id:"/>
             <h:outputLabel value="#{ringBean.itemsStack.peek().id}"/>
             <h:outputLabel value="Name:"/>
-            <p:inputText value="#{ringBean.itemsStack.peek().name}"/>
+            <p:inputText value="#{ringBean.itemsStack.peek().name}" required="true"/>
             <h:outputLabel value="Weight:"/>
-            <p:spinner value="#{ringBean.itemsStack.peek().weight}"/>
+            <p:spinner value="#{ringBean.itemsStack.peek().weight}" min="1"/>
         </h:panelGrid>
     </ui:composition>
 </h:body>

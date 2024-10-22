@@ -64,7 +64,7 @@ public class BookCreature implements Identable, Ownerable{
     private Long creatureLocationId;
 
     @Column(name = "attack_level", nullable = false)
-    private Double attackLevel; // Must be greater than 0, cannot be null
+    private Double attackLevel = 0.001; // Must be greater than 0, cannot be null
 
     @ManyToOne
     @JoinColumn(name = "ring_id", nullable = false)
