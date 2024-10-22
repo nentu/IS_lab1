@@ -8,9 +8,9 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head/>
 <h:body>
-    <ui:include src="../../head.xhtml"></ui:include>
+    <ui:include src="../../head.xhtml"/>
         <h:form id="ringTableForm">
-            <p:poll interval="1" update="ringTableForm"/>
+            // <!-- <p:poll interval="2" update="ringTableForm"/>-->
             <p:outputLabel value="Ring"/>
 
             <ui:include src="table.xhtml"/>
@@ -55,5 +55,7 @@
                              onclick="PF('ringComponentDialog').hide();"/>
         </p:dialog>
     </h:form>
+<!--    <ui:include src="../bookCreature/editPanel.xhtml"/>-->
+
 </h:body>
 </html>

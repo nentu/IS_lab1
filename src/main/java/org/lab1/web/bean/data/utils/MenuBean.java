@@ -28,6 +28,9 @@ public class MenuBean {
     public String goCity(){
         return "magicCity";
     }
+    public String goExtra(){
+        return "extra";
+    }
     public String goBookCreature(){
         return "bookCreature";
     }

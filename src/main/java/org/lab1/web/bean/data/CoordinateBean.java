@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class CoordinateBean extends UsedManagerBean<Coordinates> {
 
     public CoordinateBean() {
-        super(Coordinates.class, "coordinateEditPanel", "coordComponentDialog");
+        super(Coordinates.class, "coordinate");
     }
 
 

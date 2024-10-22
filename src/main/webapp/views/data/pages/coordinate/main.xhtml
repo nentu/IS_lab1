@@ -10,7 +10,7 @@
 <h:body>
     <ui:include src="../../head.xhtml"/>
     <h:form id="coordinateTableForm">
-        <!--            <p:poll interval="1" update="@form"/>-->
+        <!--            // <p:poll interval="2" update="@form"/>-->
 
         <p:outputLabel value="Coordinates"/>
 
@@ -37,8 +37,8 @@
 
     <h:form id="coordinateEditPanel">
         <p:dialog
-                id="coordComponentDialog"
-                widgetVar="coordComponentDialog"
+                id="coordinateComponentDialog"
+                widgetVar="coordinateComponentDialog"
                 header="Edit coordinate"
                 closable="false"
         >
@@ -46,14 +46,14 @@
             <p:commandButton value="Edit" action="#{coordinatesBean.editItem()}"
                              rendered="#{userBean.admin || userBean.id == coordinatesBean.itemsStack.peek().owner.id}"
                              update="coordinateTableForm"
-                             onclick="PF('coordComponentDialog').hide();"/>
+                             onclick="PF('coordinateComponentDialog').hide();"/>
             <p:commandButton value="Remove" action="#{coordinatesBean.removeItem()}"
                              rendered="#{userBean.admin || userBean.id == coordinatesBean.itemsStack.peek().owner.id}"
                              update="coordinateTableForm"
-                             onclick="PF('coordComponentDialog').hide();"/>
+                             onclick="PF('coordinateComponentDialog').hide();"/>
             <p:commandButton value="Close" action="#{coordinatesBean.freeStack()}"
                              update="coordinateTableForm"
-                             onclick="PF('coordComponentDialog').hide();"/>
+                             onclick="PF('coordinateComponentDialog').hide();"/>
         </p:dialog>
     </h:form>
 </h:body>

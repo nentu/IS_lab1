@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class BookCreatureBean extends ManagerBean<BookCreature> {
 
     public BookCreatureBean() {
-        super(BookCreature.class, "bookCreatureEditPanel", "bookCreatureComponentDialog");
+        super(BookCreature.class, "bookCreature");
     }
 
     @Override

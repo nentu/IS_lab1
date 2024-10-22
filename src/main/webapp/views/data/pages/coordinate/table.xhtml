@@ -45,8 +45,8 @@
                         value="edit"
                         rendered="#{userBean.admin || userBean.id == coordinate.owner.id}"
                         action="#{coordinatesBean.setSelectedItem(coordinate)}"
-                        update="coordinateEditPanel:coordComponentDialog"
-                        oncomplete="PF('coordComponentDialog').show();">
+                        update="coordinateEditPanel:coordinateComponentDialog"
+                        oncomplete="PF('coordinateComponentDialog').show();">
                 </p:commandButton>
             </p:column>
         </p:dataTable>

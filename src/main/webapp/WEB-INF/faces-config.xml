@@ -14,7 +14,7 @@
         <navigation-case>
             <from-action>#{userBean.validateUser}</from-action>
             <from-outcome>true</from-outcome>
-            <to-view-id>/views/data/tables/ring/table.xhtml</to-view-id>
+            <to-view-id>/views/data/pages/ring/main.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -36,7 +36,7 @@
         <navigation-case>
             <from-action>#{menuBean.goCoordinates}</from-action>
             <from-outcome>coordinate</from-outcome>
-            <to-view-id>/views/data/tables/coordinate/table.xhtml</to-view-id>
+            <to-view-id>/views/data/pages/coordinate/main.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -47,7 +47,7 @@
         <navigation-case>
             <from-action>#{menuBean.goRings}</from-action>
             <from-outcome>ring</from-outcome>
-            <to-view-id>/views/data/tables/ring/table.xhtml</to-view-id>
+            <to-view-id>/views/data/pages/ring/main.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -57,7 +57,7 @@
         <navigation-case>
             <from-action>#{menuBean.goCity}</from-action>
             <from-outcome>magicCity</from-outcome>
-            <to-view-id>/views/data/tables/magicCity/table.xhtml</to-view-id>
+            <to-view-id>/views/data/pages/magicCity/main.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -67,7 +67,16 @@
         <navigation-case>
             <from-action>#{menuBean.goBookCreature}</from-action>
             <from-outcome>bookCreature</from-outcome>
-            <to-view-id>/views/data/tables/bookCreature/table.xhtml</to-view-id>
+            <to-view-id>/views/data/pages/bookCreature/main.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{menuBean.goExtra}</from-action>
+            <from-outcome>extra</from-outcome>
+            <to-view-id>/views/data/pages/extraActions.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

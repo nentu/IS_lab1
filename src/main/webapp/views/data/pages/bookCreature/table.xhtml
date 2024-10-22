@@ -10,7 +10,7 @@
 <h:body>
     <ui:composition>
 
-        <p:dataTable var="bookCreature" value="#{bookCreatureBean.items}"
+        <p:dataTable var="bookCreature" value="#{bean.items}"
                      paginator="true" rows="5"
                      paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                      rowsPerPageTemplate="5,10,15,25,50">
@@ -64,11 +64,11 @@
             </p:column>
 
             <p:column
-                    headerText="CREATURELOCATIONID"
-                    sortBy="#{bookCreature.creatureLocationId}"
-                    filterBy="#{bookCreature.creatureLocationId}"
+                    headerText="CREATURELOCATION"
+                    sortBy="#{bookCreature.creatureLocation.name}"
+                    filterBy="#{bookCreature.creatureLocation.name}"
                     filterMatchMode="contains">
-                <h:outputText value="#{bookCreature.creatureLocationId}"/>
+                <h:outputText value="#{bookCreature.creatureLocation.name}"/>
             </p:column>
 
             <p:column
@@ -87,16 +87,17 @@
                 <h:outputText value="#{bookCreature.ringId}"/>
             </p:column>
 
-
-            <p:column headerText="Edit">
-                <p:commandButton
-                        value="edit"
-                        rendered="#{userBean.admin || userBean.id == bookCreature.owner.id}"
-                        action="#{bookCreatureBean.setSelectedItem(bookCreature)}"
-                        update="bookCreatureEditPanel:bookCreatureComponentDialog"
-                        oncomplete="PF('bookCreatureComponentDialog').show();">
-                </p:commandButton>
-            </p:column>
+            <c:if test="${needEdit}">
+                <p:column headerText="Edit">
+                    <p:commandButton
+                            value="edit"
+                            rendered="#{userBean.admin || userBean.id == bookCreature.owner.id}"
+                            action="#{bean.setSelectedItem(bookCreature)}"
+                            update="bookCreatureEditPanel:bookCreatureComponentDialog"
+                            oncomplete="PF('bookCreatureComponentDialog').show();">
+                    </p:commandButton>
+                </p:column>
+            </c:if>
         </p:dataTable>
 
 

@@ -27,6 +27,7 @@ public abstract class ManagerBean<T extends Ownerable & Identable> {
     protected final Class<T> classType;
     protected final String editPanelName;
     protected final String componentDialogName;
+    protected final String name;
     public T selectedItem;
 
     protected Stack<T> itemsStack;
@@ -35,9 +36,10 @@ public abstract class ManagerBean<T extends Ownerable & Identable> {
         return itemsStack.peek();
     }
 
-    public ManagerBean(Class<T> classType, String editPanelName, String componentDialogName) {
-        this.editPanelName = editPanelName;
-        this.componentDialogName = componentDialogName;
+    public ManagerBean(Class<T> classType, String name) {
+        this.editPanelName = name + "EditPanel";
+        this.componentDialogName = name + "ComponentDialog";
+        this.name = name;
         this.itemsStack = new Stack<>();
         this.classType = classType;
 
@@ -68,6 +70,7 @@ public abstract class ManagerBean<T extends Ownerable & Identable> {
 
 
     public void editStack() {
+
         if ((!itemsStack.empty()) && (itemsStack.peek().getId() > 0)) {
             PrimeFaces.current().ajax().update(editPanelName);
             PrimeFaces.current().executeScript("PF('" + componentDialogName + "').show()");

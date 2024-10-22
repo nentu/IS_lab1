@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class RingBean extends UsedManagerBean<Ring> {
 
     public RingBean() {
-        super(Ring.class, "ringEditPanel", "ringComponentDialog");
+        super(Ring.class, "ring");
     }
 
     @Override

@@ -8,59 +8,50 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head/>
 <h:body>
-    <ui:composition>
-        <h:form id="bookCreatureTableForm">
-            <p:poll interval="1" update="bookCreatureTableForm"/>
+    <ui:include src="../../head.xhtml"/>
 
-            <p:outputLabel value="bookCreature"/>
+    <!--    <ui:composition>-->
+    <h:form id="bookCreatureTableForm">
+     <!-- <p:poll interval="2" update="bookCreatureTableForm"/>-->
 
-            <ui:include src="table.xhtml"/>
-            <p:commandButton
-                    value="Add"
-                    action="#{bookCreatureBean.emptyInstance()}"
-                    update="bookCreatureCreatePanel:bookCreatureCreateComponentDialog"
-                    oncomplete="PF('bookCreatureCreateComponentDialog').show();">
-            </p:commandButton>
+        <p:outputLabel value="bookCreature"/>
 
-        </h:form>
+        <ui:include src="table.xhtml">
+            <ui:param name="bean" value="#{bookCreatureBean}"/>
+            <ui:param name="needEdit" value="#{true}"/>
+        </ui:include>
+        <p:commandButton
+                value="Add"
+                action="#{bookCreatureBean.emptyInstance()}"
+                update="bookCreatureCreatePanel:bookCreatureCreateComponentDialog"
+                oncomplete="PF('bookCreatureCreateComponentDialog').show();">
+        </p:commandButton>
 
-        <h:form id="bookCreatureCreatePanel">
-            <p:dialog id="bookCreatureCreateComponentDialog" widgetVar="bookCreatureCreateComponentDialog" header="Create book creature">
-                <ui:include src="panelInput.xhtml"/>
-                <p:commandButton value="Add" action="#{bookCreatureBean.addItem()}"
-                                 update="bookCreatureTableForm :bookCreatureCreatePanel"
-                                 onerror="handleError(xhr, status, error)"
-                />
-            </p:dialog>
-            <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
-        </h:form>
+    </h:form>
 
-        <h:form id="bookCreatureEditPanel">
+    <h:form id="bookCreatureCreatePanel">
+        <p:dialog id="bookCreatureCreateComponentDialog" widgetVar="bookCreatureCreateComponentDialog"
+                  header="Create book creature">
+            <ui:include src="panelInput.xhtml"/>
+            <p:commandButton value="Add" action="#{bookCreatureBean.addItem()}"
+                             update="bookCreatureTableForm :bookCreatureCreatePanel"
+                             onerror="handleError(xhr, status, error)"
+            />
+        </p:dialog>
+        <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
+    </h:form>
 
-            <p:dialog
-                    id="bookCreatureComponentDialog"
-                    widgetVar="bookCreatureComponentDialog"
-                    header="Edit book creature"
-                    closable="false"
-            >
-                <ui:include src="panelInput.xhtml"/>
-                <p:commandButton value="Edit" action="#{bookCreatureBean.editItem()}"
-                                 rendered="#{userBean.admin || userBean.id == bookCreatureBean.itemsStack.peek().owner.id}"
-                                 onclick="PF('bookCreatureComponentDialog').hide();"
-                                 update="bookCreatureTableForm"
-                />
-                <p:commandButton value="Remove" action="#{bookCreatureBean.removeItem()}"
-                                 rendered="#{userBean.admin || userBean.id == bookCreatureBean.itemsStack.peek().owner.id}"
-                                 update="bookCreatureTableForm"
-                                 onclick="PF('bookCreatureComponentDialog').hide();"/>
-                <p:commandButton value="Close" action="#{bookCreatureBean.freeStack()}"
-                                 update="bookCreatureTableForm"
-                                 onclick="PF('bookCreatureComponentDialog').hide();"/>
-            </p:dialog>
+    <ui:include src="editPanel.xhtml"/>
 
-        </h:form>
+    <h:form id="hiddenForm" style="display: none;">
+        <p:remoteCommand name="onload" actionListener="#{bookCreatureBean.editStack()}"
+                         oncomplete="console.log('Page loaded');"/>
+    </h:form>
 
-
-    </ui:composition>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            onload();
+        });
+    </script>
 </h:body>
 </html>

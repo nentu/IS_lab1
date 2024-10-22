@@ -1,11 +1,11 @@
-CREATE OR REPLACE FUNCTION delete_book_creatures_by_ring_id(p_ring_id INTEGER)
-RETURNS VOID AS $$
+CREATE OR REPLACE PROCEDURE delete_book_creatures_by_ring_id(p_ring_id INTEGER)
+LANGUAGE plpgsql AS $$
 BEGIN
     DELETE FROM book_creatures
     WHERE ring_id = p_ring_id;
 END;
 $$
- LANGUAGE plpgsql;
+ ;
  
  
 CREATE OR REPLACE FUNCTION get_youngest_book_creature()
@@ -34,8 +34,8 @@ $$
  LANGUAGE plpgsql;
 
 
-CREATE OR REPLACE FUNCTION move_hobbits_to_morder()
-RETURNS VOID AS $$
+CREATE OR REPLACE PROCEDURE move_hobbits_to_morder()
+LANGUAGE plpgsql AS $$
 BEGIN
     UPDATE book_creatures as bc
 		SET creature_location_id = (
@@ -48,12 +48,12 @@ BEGIN
 	
 END;
 $$
- LANGUAGE plpgsql;
+;
  
 
 
-CREATE OR REPLACE FUNCTION swap_rings(creature1_id integer, creature2_id integer)
-RETURNS VOID AS $$
+CREATE OR REPLACE PROCEDURE swap_rings(creature1_id integer, creature2_id integer)
+LANGUAGE plpgsql AS $$
 DECLARE
 	temp_ring_1 bigint;
 BEGIN
@@ -77,5 +77,5 @@ BEGIN
 	
 END;
 $$
- LANGUAGE plpgsql;
+;
  

@@ -14,7 +14,7 @@
         <p:commandButton value="logout" action="#{userBean.logout}"/>
 
         <h:form id="includeForm">
-            <h:outputLabel value="${menuBean.contentName}"/>
+<!--            <h:outputLabel value="${menuBean.contentName}"/>-->
             <p:commandButton value="Book creatures" action="#{menuBean.goBookCreature}"
                              update="@form"
             />
@@ -25,6 +25,9 @@
                              update="@form"
             />
             <p:commandButton value="Rings" action="#{menuBean.goRings}"
+                             update="@form"
+            />
+            <p:commandButton value="Extra" action="#{menuBean.goExtra}"
                              update="@form"
             />
 

@@ -113,14 +113,23 @@ public class CRUD {
         return res;
     }
 
+    private static void refresh(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
+        emf.getCache().evictAll();
+        emf.close();
+    }
+
     private static void executeProcedure(String procedure) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<BookCreature> res = em.createNativeQuery("SELECT * FROM " + procedure + ";").getResultList();
+        em.createNativeQuery("CALL " + procedure + ";").executeUpdate();
+        em.clear();
         em.getTransaction().commit();
         em.close();
         emf.close();
+
+        refresh();
     }
 
 
@@ -135,7 +144,7 @@ public class CRUD {
         return res;
     }
 
-    public static List<BookCreature> getStronger(float minAttack) {
+    public static List<BookCreature> getStronger(Double minAttack) {
         return executeFunction("get_stronger(" + minAttack + ")");
     }
 
@@ -149,19 +158,14 @@ public class CRUD {
 
     public static void swapRings(long id1, long id2) {
         executeProcedure("swap_rings(" + id1 + ", " + id2 + ")");
+
     }
 
 
-    public static BookCreature getYoungestBookCreature() {
-        List<BookCreature> resList = executeFunction(
+    public static List<BookCreature> getYoungestBookCreature() {
+        List<BookCreature> res = executeFunction(
                 "get_youngest_book_creature()"
         );
-
-        BookCreature res = new BookCreature();
-        if (resList.isEmpty())
-            res.setId(-1);
-        else
-            res = resList.get(0);
 
         return res;
 

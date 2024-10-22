@@ -8,55 +8,59 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head/>
 <h:body>
-    <ui:composition>
-        <h:form id="cityTableForm">
-            <p:poll interval="1" update="cityTableForm"/>
+    <ui:include src="../../head.xhtml"/>
 
-            <p:outputLabel value="Magic City"/>
-            <ui:include src="table.xhtml"/>
+    <!--    <ui:composition>-->
+    <h:form id="cityTableForm">
+        // <!-- <p:poll interval="2" update="cityTableForm"/>-->
 
-            <p:commandButton
-                    value="Add"
-                    action="#{magicCityBean.emptyInstance()}"
-                    update="cityCreatePanel:cityCreateComponentDialog"
-                    oncomplete="PF('cityCreateComponentDialog').show();">
-            </p:commandButton>
+        <p:outputLabel value="Magic City"/>
+        <ui:include src="table.xhtml"/>
 
-        </h:form>
+        <p:commandButton
+                value="Add"
+                action="#{magicCityBean.emptyInstance()}"
+                update="cityCreatePanel:cityCreateComponentDialog"
+                oncomplete="PF('cityCreateComponentDialog').show();">
+        </p:commandButton>
+
+    </h:form>
 
 
-        <h:form id="cityCreatePanel">
-            <p:dialog id="cityCreateComponentDialog" widgetVar="cityCreateComponentDialog" header="Create city">
-                <ui:include src="panelInput.xhtml"/>
-                <p:commandButton value="Add" action="#{magicCityBean.addItem()}"
-                                 update="cityTableForm :cityCreatePanel"
-                                 onerror="handleError(xhr, status, error)"
-                />
-            </p:dialog>
-            <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
-        </h:form>
+    <h:form id="cityCreatePanel">
+        <p:dialog id="cityCreateComponentDialog" widgetVar="cityCreateComponentDialog" header="Create city">
+            <ui:include src="panelInput.xhtml"/>
+            <p:commandButton value="Add" action="#{magicCityBean.addItem()}"
+                             update="cityTableForm :cityCreatePanel"
+                             onerror="handleError(xhr, status, error)"
+            />
+        </p:dialog>
+        <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
+    </h:form>
 
-        <h:form id="cityEditPanel">
-            <p:dialog
-                    id="cityComponentDialog"
-                    widgetVar="cityComponentDialog"
-                    header="Edit magic city"
-                    closable="false"
-            >
-                <ui:include src="panelInput.xhtml"/>
-                <p:commandButton value="Edit" action="#{magicCityBean.editItem()}"
-                                 rendered="#{userBean.admin || userBean.id == magicCityBean.itemsStack.peek().owner.id}"
-                                 update="cityTableForm"
-                                 onclick="PF('cityComponentDialog').hide();"/>
-                <p:commandButton value="Remove" action="#{magicCityBean.removeItem()}"
-                                 rendered="#{userBean.admin || userBean.id == magicCityBean.itemsStack.peek().owner.id}"
-                                 update="cityTableForm"
-                                 onclick="PF('cityComponentDialog').hide();"/>
-                <p:commandButton value="Close" action="#{magicCityBean.freeStack()}"
-                                 update="bookCreatureTableForm"
-                                 onclick="PF('bookCreatureComponentDialog').hide();"/>
-            </p:dialog>
-        </h:form>
-    </ui:composition>
+    <h:form id="cityEditPanel">
+        <p:dialog
+                id="cityComponentDialog"
+                widgetVar="cityComponentDialog"
+                header="Edit magic city"
+                closable="false"
+        >
+            <ui:include src="panelInput.xhtml"/>
+            <p:commandButton value="Edit" action="#{magicCityBean.editItem()}"
+                             rendered="#{userBean.admin || userBean.id == magicCityBean.itemsStack.peek().owner.id}"
+                             update="cityTableForm"
+                             onclick="PF('cityComponentDialog').hide();"/>
+            <p:commandButton value="Remove" action="#{magicCityBean.removeItem()}"
+                             rendered="#{userBean.admin || userBean.id == magicCityBean.itemsStack.peek().owner.id}"
+                             update="cityTableForm"
+                             onclick="PF('cityComponentDialog').hide();"/>
+            <p:commandButton value="Close" action="#{magicCityBean.freeStack()}"
+                             update="cityTableForm"
+                             onclick="PF('cityComponentDialog').hide();"/>
+        </p:dialog>
+    </h:form>
+
+<!--    <ui:include src="../bookCreature/editPanel.xhtml"/>-->
+    <!--    </ui:composition>-->
 </h:body>
 </html>
