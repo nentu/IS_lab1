@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="default" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <jta-data-source>java:jboss/datasources/PostgresDS</jta-data-source>
+        <!--  Replace with your JNDI data source  -->
+        <class>org.lab1.data.entity.Coordinates</class>
+        <class>org.lab1.data.entity.Ring</class>
+        <class>org.lab1.data.entity.MagicCity</class>
+        <class>org.lab1.data.entity.BookCreatureType</class>
+        <class>org.lab1.data.entity.BookCreature</class>
+        <class>org.lab1.data.entity.User</class>
+        <properties>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <!--  Optional: Set logging level  -->
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <!--  Options: create, drop-and-create, update  -->
+        </properties>
+    </persistence-unit>
+</persistence>

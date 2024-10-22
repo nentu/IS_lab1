@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head/>
+<h:body>
+    <ui:composition>
+        <h:form id="ringTableForm">
+            <p:poll interval="1" update="ringTableForm"/>
+            <p:outputLabel value="Ring"/>
+            <p:dataTable var="ring" value="#{ringBean.items}"
+                         paginator="true" rows="5"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="5,10,15,25,50">
+
+                <p:column
+                        headerText="ID"
+                        sortBy="#{ring.id}"
+                        filterBy="#{ring.id}"
+                        filterMatchMode="contains">
+                    <h:outputText value="#{ring.id}"/>
+                </p:column>
+
+                <p:column
+                        headerText="NAME"
+                        sortBy="#{ring.name}"
+                        filterBy="#{ring.name}"
+                        filterMatchMode="contains">
+                    <h:outputText value="#{ring.name}"/>
+                </p:column>
+
+                <p:column
+                        headerText="WEIGHT"
+                        sortBy="#{ring.weight}"
+                        filterBy="#{ring.weight}"
+                        filterMatchMode="contains">
+                    <h:outputText value="#{ring.weight}"/>
+                </p:column>
+
+
+
+                <p:column headerText="Edit">
+                    <p:commandButton
+                            value="edit"
+                            rendered="#{userBean.admin || userBean.id == ring.owner.id}"
+                            action="#{ringBean.setSelectedItem(ring)}"
+                            update="ringEditPanel:ringComponentDialog"
+                            oncomplete="PF('ringComponentDialog').show();">
+                        <!--                        <f:setPropertyActionListener target="}" value="#{ring}"/>-->
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton
+                    value="Add"
+                    action="#{ringBean.emptyInstance()}"
+                    update="ringCreatePanel:ringCreateComponentDialog"
+                    oncomplete="PF('ringCreateComponentDialog').show();">
+            </p:commandButton>
+        </h:form>
+
+        <h:form id="ringCreatePanel">
+            <p:dialog id="ringCreateComponentDialog" widgetVar="ringCreateComponentDialog" header="Create ring">
+                <ui:include src="panelInput.xhtml"/>
+                <p:commandButton value="Add" action="#{ringBean.addItem()}"
+                                 update="ringTableForm :ringCreatePanel"
+                                 onerror="handleError(xhr, status, error)"
+                />
+            </p:dialog>
+            <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
+        </h:form>
+
+        <h:form id="ringEditPanel">
+            <p:dialog
+                    id="ringComponentDialog"
+                    widgetVar="ringComponentDialog"
+                    header="Edit ring"
+                    closable="false"
+            >
+                <ui:include src="panelInput.xhtml"/>
+                <p:commandButton value="Edit" action="#{ringBean.editItem()}"
+                                 rendered="#{userBean.admin || userBean.id == ringBean.itemsStack.peek().owner.id}"
+                                 update="ringTableForm"
+                                 onclick="PF('ringComponentDialog').hide();"/>
+                <p:commandButton value="Remove" action="#{ringBean.removeItem()}"
+                                 rendered="#{userBean.admin || userBean.id == ringBean.itemsStack.peek().owner.id}"
+                                 update="ringTableForm"
+                                 onclick="PF('ringComponentDialog').hide();"/>
+                <p:commandButton value="Close" action="#{ringBean.freeStack()}"
+                                 update="bookCreatureTableForm"
+                                 onclick="PF('bookCreatureComponentDialog').hide();"/>
+            </p:dialog>
+        </h:form>
+    </ui:composition>
+</h:body>
+</html>

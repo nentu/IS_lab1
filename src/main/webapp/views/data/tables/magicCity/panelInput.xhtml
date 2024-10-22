@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head/>
+<h:body>
+    <ui:composition>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Id:"/>
+            <h:outputLabel value="#{magicCityBean.itemsStack.peek().id}"/>
+            <h:outputLabel value="Name:"/>
+            <p:inputText value="#{magicCityBean.itemsStack.peek().name}"/>
+            <h:outputLabel value="Area:"/>
+            <p:spinner value="#{magicCityBean.itemsStack.peek().area}"/>
+            <h:outputLabel value="Population:"/>
+            <p:spinner value="#{magicCityBean.itemsStack.peek().population}"/>
+            <h:outputLabel value="Establishment date:"/>
+            <p:datePicker value="#{magicCityBean.itemsStack.peek().establishmentDate}" showTime="true">
+                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" type="localDateTime"/>
+            </p:datePicker>
+            <h:outputLabel value="Governor:"/>
+            <p:selectOneMenu value="#{magicCityBean.itemsStack.peek().governor}">
+                <f:selectItems value="#{bookCreatureTypeBean.typeList}" var="type" itemValue="#{type}"
+                               itemLabel="#{type}"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="Capital:"/>
+            <p:selectOneRadio value="#{magicCityBean.itemsStack.peek().capital}">
+                <f:selectItem itemLabel="True" itemValue="#{true}"/>
+                <f:selectItem itemLabel="False" itemValue="#{false}"/>
+            </p:selectOneRadio>
+            <h:outputLabel value="Population density:"/>
+            <p:spinner value="#{magicCityBean.itemsStack.peek().populationDensity}" stepFactor="0.1"/>
+
+        </h:panelGrid>
+    </ui:composition>
+</h:body>
+</html>

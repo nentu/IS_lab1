@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head/>
+<h:body>
+    <ui:composition>
+        <h:outputLabel value="#{bookCreatureBean.itemsStack.size()}"/>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="id:"/>
+            <h:outputLabel value="#{bookCreatureBean.itemsStack.peek().id}"/>
+            <h:outputLabel value="name:"/>
+            <p:inputText value="#{bookCreatureBean.itemsStack.peek().name}"/>
+            <h:outputLabel value="coordinates:"/>
+            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().coordinatesId}">
+                <f:selectItems value="#{coordinatesBean.idList}" var="id" itemValue="#{id}" itemLabel="#{id}"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="creationDate:"/>
+            <p:datePicker value="#{bookCreatureBean.itemsStack.peek().creationDate}" showTime="true">
+                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" type="localDateTime"/>
+            </p:datePicker>
+            <h:outputLabel value="age:"/>
+            <p:spinner value="#{bookCreatureBean.itemsStack.peek().age}"/>
+            <h:outputLabel value="creatureType:"/>
+            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().creatureType}">
+                <f:selectItems value="#{bookCreatureTypeBean.typeList}" var="type" itemValue="#{type}"
+                               itemLabel="#{type}"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="creatureLocation:"/>
+            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().creatureLocationId}">
+                <f:selectItems value="#{magicCityBean.idList}" var="id" itemValue="#{id}" itemLabel="#{id}"/>
+            </p:selectOneMenu>
+            <h:outputLabel value="attackLevel:"/>
+            <p:spinner value="#{bookCreatureBean.itemsStack.peek().attackLevel}"/>
+            <h:outputLabel value="ring:"/>
+            <p:selectOneMenu value="#{bookCreatureBean.itemsStack.peek().ringId}">
+                <f:selectItems value="#{ringBean.idList}" var="id" itemValue="#{id}" itemLabel="#{id}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+    </ui:composition>
+</h:body>
+</html>
