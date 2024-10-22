@@ -9,14 +9,33 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class MenuBean {
     static String prefix = "tables/";
     static String postfix = "/table.xhtml";
 
-    String contentName = "bookCreature";
+    String contentName = "coordinate";
+
+    public String goCoordinates(){
+        return "coordinate";
+    }
+
+    public String goRings(){
+        return "ring";
+    }
+    public String goCity(){
+        return "magicCity";
+    }
+    public String goBookCreature(){
+        return "bookCreature";
+    }
+
+    public String setContentName(String contentName) {
+        this.contentName = contentName;
+        return contentName;
+    }
 
     public String getContentName() {
         return prefix + contentName + postfix;
