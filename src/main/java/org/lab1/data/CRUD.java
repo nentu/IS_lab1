@@ -104,7 +104,7 @@ public class CRUD {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        List<T> res = em.createQuery("select o from " + classname.getName() + " o").getResultList();
+        List<T> res = em.createQuery("select o from " + classname.getName() + " o order by o.id").getResultList();
         em.getTransaction().commit();
         em.close();
         emf.close();

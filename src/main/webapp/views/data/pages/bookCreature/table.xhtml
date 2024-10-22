@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head/>
+<h:body>
+    <ui:composition>
+
+        <p:dataTable var="bookCreature" value="#{bookCreatureBean.items}"
+                     paginator="true" rows="5"
+                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rowsPerPageTemplate="5,10,15,25,50">
+
+            <p:column
+                    headerText="ID"
+                    sortBy="#{bookCreature.id}"
+                    filterBy="#{bookCreature.id}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.id}"/>
+            </p:column>
+
+            <p:column
+                    headerText="NAME"
+                    sortBy="#{bookCreature.name}"
+                    filterBy="#{bookCreature.name}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.name}"/>
+            </p:column>
+
+            <p:column
+                    headerText="COORDINATESID"
+                    sortBy="#{bookCreature.coordinatesId}"
+                    filterBy="#{bookCreature.coordinatesId}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.coordinatesId}"/>
+            </p:column>
+
+            <p:column
+                    headerText="CREATIONDATE"
+                    sortBy="#{bookCreature.creationDate}"
+                    filterBy="#{bookCreature.creationDate}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.creationDate}"/>
+            </p:column>
+
+            <p:column
+                    headerText="AGE"
+                    sortBy="#{bookCreature.age}"
+                    filterBy="#{bookCreature.age}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.age}"/>
+            </p:column>
+
+            <p:column
+                    headerText="CREATURETYPE"
+                    sortBy="#{bookCreature.creatureType}"
+                    filterBy="#{bookCreature.creatureType}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.creatureType}"/>
+            </p:column>
+
+            <p:column
+                    headerText="CREATURELOCATIONID"
+                    sortBy="#{bookCreature.creatureLocationId}"
+                    filterBy="#{bookCreature.creatureLocationId}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.creatureLocationId}"/>
+            </p:column>
+
+            <p:column
+                    headerText="ATTACKLEVEL"
+                    sortBy="#{bookCreature.attackLevel}"
+                    filterBy="#{bookCreature.attackLevel}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.attackLevel}"/>
+            </p:column>
+
+            <p:column
+                    headerText="RINGID"
+                    sortBy="#{bookCreature.ringId}"
+                    filterBy="#{bookCreature.ringId}"
+                    filterMatchMode="contains">
+                <h:outputText value="#{bookCreature.ringId}"/>
+            </p:column>
+
+
+            <p:column headerText="Edit">
+                <p:commandButton
+                        value="edit"
+                        rendered="#{userBean.admin || userBean.id == bookCreature.owner.id}"
+                        action="#{bookCreatureBean.setSelectedItem(bookCreature)}"
+                        update="bookCreatureEditPanel:bookCreatureComponentDialog"
+                        oncomplete="PF('bookCreatureComponentDialog').show();">
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+
+
+    </ui:composition>
+</h:body>
+</html>

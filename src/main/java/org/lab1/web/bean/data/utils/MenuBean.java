@@ -14,7 +14,7 @@ import javax.faces.bean.SessionScoped;
 @AllArgsConstructor
 public class MenuBean {
     static String prefix = "tables/";
-    static String postfix = "/table.xhtml";
+    static String postfix = "/main.xhtml";
 
     String contentName = "bookCreature";
 

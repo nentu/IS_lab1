@@ -12,14 +12,17 @@
     <h:outputLabel value="User: #{userBean.nick}"/>
     <p:commandButton value="logout" action="#{userBean.logout}"/>
 
-    <ui:include src="tables/bookCreature/table.xhtml"/>
-    <ui:include src="tables/coordinate/table.xhtml"/>
-    <ui:include src="tables/magicCity/table.xhtml"/>
-    <ui:include src="tables/ring/table.xhtml"/>
+    <ui:include src="pages/bookCreature/main.xhtml"/>
+    <ui:include src="pages/coordinate/main.xhtml"/>
+    <ui:include src="pages/magicCity/main.xhtml"/>
+<!--    <ui:include src="pages/main.xhtml">-->
+<!--        <ui:param name="bean" value="#{magicCityBean}"/>-->
+<!--    </ui:include>-->
+    <ui:include src="pages/ring/main.xhtml"/>
 
     <c:if test="#{userBean.admin}">
 
-        <ui:include src="tables/authRequests.xhtml"/>
+        <ui:include src="pages/authRequests.xhtml"/>
     </c:if>
 </h:body>
 </html>

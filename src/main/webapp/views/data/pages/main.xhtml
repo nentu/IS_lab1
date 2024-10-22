@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head/>
+<h:body>
+    <ui:composition>
+        <h:form id="${bean.itemName}TableForm">
+            <p:poll interval="1" update="${bean.itemName}TableForm"/>
+            <p:outputLabel value="Ring"/>
+
+            <ui:include src="${bean.itemName}/table.xhtml"/>
+
+            <p:commandButton
+                    value="Add"
+                    action="#{bean.emptyInstance()}"
+                    update="${bean.itemName}CreatePanel:${bean.itemName}CreateComponentDialog"
+                    oncomplete="PF('${bean.itemName}CreateComponentDialog').show();">
+            </p:commandButton>
+        </h:form>
+
+        <h:form id="${bean.itemName}CreatePanel">
+            <p:dialog id="${bean.itemName}CreateComponentDialog" widgetVar="${bean.itemName}CreateComponentDialog" header="Create ${bean.itemName}">
+                <ui:include src="panelInput.xhtml"/>
+                <p:commandButton value="Add" action="#{bean.addItem()}"
+                                 update="${bean.itemName}TableForm :${bean.itemName}CreatePanel"
+                                 onerror="handleError(xhr, status, error)"
+                />
+            </p:dialog>
+            <p:messages globalOnly="false" showDetail="true" showSummary="true"/>
+        </h:form>
+
+        <h:form id="${bean.itemName}EditPanel">
+            <p:dialog
+                    id="${bean.itemName}ComponentDialog"
+                    widgetVar="${bean.itemName}ComponentDialog"
+                    header="Edit ${bean.itemName}"
+                    closable="false"
+            >
+                <ui:include src="${bean.itemName}/panelInput.xhtml"/>
+                <p:commandButton value="Edit" action="#{bean.editItem()}"
+                                 rendered="#{userBean.admin || userBean.id == bean.itemsStack.peek().owner.id}"
+                                 update="${bean.itemName}TableForm"
+                                 onclick="PF('${bean.itemName}ComponentDialog').hide();"/>
+                <p:commandButton value="Remove" action="#{bean.removeItem()}"
+                                 rendered="#{userBean.admin || userBean.id == bean.itemsStack.peek().owner.id}"
+                                 update="${bean.itemName}TableForm"
+                                 onclick="PF('${bean.itemName}ComponentDialog').hide();"/>
+                <p:commandButton value="Close" action="#{bean.freeStack()}"
+                                 update="${bean.itemName}CreatureTableForm"
+                                 onclick="PF('${bean.itemName}CreatureComponentDialog').hide();"/>
+            </p:dialog>
+        </h:form>
+    </ui:composition>
+</h:body>
+</html>

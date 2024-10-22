@@ -12,48 +12,9 @@
         <h:form id="ringTableForm">
             <p:poll interval="1" update="ringTableForm"/>
             <p:outputLabel value="Ring"/>
-            <p:dataTable var="ring" value="#{ringBean.items}"
-                         paginator="true" rows="5"
-                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                         rowsPerPageTemplate="5,10,15,25,50">
 
-                <p:column
-                        headerText="ID"
-                        sortBy="#{ring.id}"
-                        filterBy="#{ring.id}"
-                        filterMatchMode="contains">
-                    <h:outputText value="#{ring.id}"/>
-                </p:column>
+            <ui:include src="table.xhtml"/>
 
-                <p:column
-                        headerText="NAME"
-                        sortBy="#{ring.name}"
-                        filterBy="#{ring.name}"
-                        filterMatchMode="contains">
-                    <h:outputText value="#{ring.name}"/>
-                </p:column>
-
-                <p:column
-                        headerText="WEIGHT"
-                        sortBy="#{ring.weight}"
-                        filterBy="#{ring.weight}"
-                        filterMatchMode="contains">
-                    <h:outputText value="#{ring.weight}"/>
-                </p:column>
-
-
-
-                <p:column headerText="Edit">
-                    <p:commandButton
-                            value="edit"
-                            rendered="#{userBean.admin || userBean.id == ring.owner.id}"
-                            action="#{ringBean.setSelectedItem(ring)}"
-                            update="ringEditPanel:ringComponentDialog"
-                            oncomplete="PF('ringComponentDialog').show();">
-                        <!--                        <f:setPropertyActionListener target="}" value="#{ring}"/>-->
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>
             <p:commandButton
                     value="Add"
                     action="#{ringBean.emptyInstance()}"

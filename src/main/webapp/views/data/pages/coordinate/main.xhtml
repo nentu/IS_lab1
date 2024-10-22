@@ -15,46 +15,8 @@
             <p:outputLabel value="Coordinates"/>
             <p:outputLabel value="#{coordinatesBean.fieldNames}"/>
 
-            <p:dataTable var="coordinate" value="#{coordinatesBean.items}"
-                         paginator="true" rows="5"
-                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                         rowsPerPageTemplate="5,10,15,25,50">
+            <ui:include src="table.xhtml"/>
 
-
-                <p:column
-                        headerText="ID"
-                        sortBy="#{coordinate.id}"
-                        filterBy="#{coordinate.id}"
-                        filterMatchMode="contains">
-                    <h:outputText value="#{coordinate.id}"/>
-                </p:column>
-
-                <p:column
-                        headerText="X"
-                        sortBy="#{coordinate.x}"
-                        filterBy="#{coordinate.x}"
-                        filterMatchMode="contains">
-                    <h:outputText value="#{coordinate.x}"/>
-                </p:column>
-
-                <p:column
-                        headerText="Y"
-                        sortBy="#{coordinate.y}"
-                        filterBy="#{coordinate.y}"
-                        filterMatchMode="contains">
-                    <h:outputText value="#{coordinate.y}"/>
-                </p:column>
-
-                <p:column headerText="Edit">
-                    <p:commandButton
-                            value="edit"
-                            rendered="#{userBean.admin || userBean.id == coordinate.owner.id}"
-                            action="#{coordinatesBean.setSelectedItem(coordinate)}"
-                            update="coordinateEditPanel:coordComponentDialog"
-                            oncomplete="PF('coordComponentDialog').show();">
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>
             <p:commandButton
                     value="Add"
                     action="#{coordinatesBean.emptyInstance()}"

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class MagicCityBean extends UsedManagerBean<MagicCity> {
-
+    private String itemName = "ring";
 
     public MagicCityBean() {
         super(MagicCity.class, "cityEditPanel", "cityComponentDialog");
