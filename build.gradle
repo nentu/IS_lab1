@@ -23,6 +23,9 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+
+    implementation('org.postgresql:postgresql:42.1.4')
+
     compileOnly('javax:javaee-web-api:8.0.1')
 
     implementation('org.eclipse.persistence:eclipselink:2.7.12')

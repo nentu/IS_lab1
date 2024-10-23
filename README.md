@@ -1,0 +1,1 @@
+![](C:\Users\zam12\OneDrive\Документы\university\course3\IS\lab1EE\data\UML.png)

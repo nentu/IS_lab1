@@ -14,7 +14,7 @@
         <navigation-case>
             <from-action>#{userBean.validateUser}</from-action>
             <from-outcome>true</from-outcome>
-            <to-view-id>/views/data/pages/ring/main.xhtml</to-view-id>
+            <to-view-id>/views/data/pages/bookCreature/main.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
