@@ -6,6 +6,7 @@ import org.lab1.data.entity.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import java.awt.print.Book;
 import java.util.ArrayList;
@@ -132,6 +133,18 @@ public class CRUD {
         refresh();
     }
 
+    public static void executeScript(String script){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+
+        Query q = em.createNativeQuery(script);
+        q.executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
 
     private static List<BookCreature> executeFunction(String function) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceName);

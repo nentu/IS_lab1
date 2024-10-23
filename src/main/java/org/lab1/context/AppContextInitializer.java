@@ -12,6 +12,12 @@ import org.lab1.web.bean.data.RingBean;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,9 +33,23 @@ public class AppContextInitializer implements ServletContextListener {
         System.out.println("=======");
     }
 
+    static String readFile(String path, Charset encoding)
+            throws IOException
+    {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, encoding);
+    }
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
 
+//        String content;
+//        try {
+//            content = readFile("C:\\Users\\zam12\\OneDrive\\Документы\\university\\course3\\IS\\lab1EE\\data\\sql_function.txt", StandardCharsets.UTF_8);
+//            CRUD.executeScript(content);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         if (true) {
 
             System.out.println(new BookCreatureBean().getFieldNames());

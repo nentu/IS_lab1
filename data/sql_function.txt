@@ -1,0 +1,9 @@
+CREATE OR REPLACE PROCEDURE delete_book_creatures_by_ring_id(p_ring_id INTEGER)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM book_creatures
+    WHERE ring_id = p_ring_id;
+END;
+$$
+;
